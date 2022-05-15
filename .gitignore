@@ -3,9 +3,13 @@ rotateString.dSYM/Contents/Info.plist
 .vscode/launch.json
 .vscode/tasks.json
 rotateString.dSYM/Contents/Resources/DWARF/rotateString
-rotateString
 .vscode/c_cpp_properties.json
 .vscode/settings.json
 .cph/.rotateString.cpp_54c94d5170f54e7a41958c9bde226273.prob
 .vscode/oldtasks.json
-rotateString.bin
+*.bin
+rotateString/rotateString.dSYM/Contents/Resources/DWARF/rotateString
+rotateString/rotateString.dSYM/Contents/Info.plist
+.gitignore
+rotateString/.DS_Store
+rotateString/rotateString
