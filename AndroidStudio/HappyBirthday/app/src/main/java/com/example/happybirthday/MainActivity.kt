@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -16,10 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
@@ -37,26 +38,28 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column {
-                        Column {
-                            Welcome(
-                                size = 30,
-                                color = Color.White
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_task_completed),
+                                contentDescription = null
                             )
-                            GreetingImage(
-                                message = "Alex",
-                                from = "Sid",
-                                size = 60,
-                                modifier = Modifier
-                                    .padding(8.dp)
-                                    .fillMaxSize()
-                                    .align(alignment = Alignment.CenterHorizontally)
+                            Text(
+                                text = "All tasks completed",
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
+
+                            )
+                            Text(
+                                text = "Nice Work!",
+                                textAlign = TextAlign.Center,
+                                fontSize = 16.sp
                             )
                         }
-//                        GreetingText(name = "Alex", from = "Sid", type = Events.NA, size = 20f)
-//                        GreetingText(name = "Alex", from = "Sid", type = Events.WC, size = 20f)
-//                        GreetingText(name = "Alex", from = "Sid", type = Events.HA, size = 30f)
-//                        GreetingText(name = "Alex", from = "Sid", type = Events.HB, size = 30f)
                     }
                 }
             }
@@ -146,7 +149,7 @@ fun Welcome(
 //            .alpha(0.5f)
             .padding(10.dp),
         fontSize = size.sp,
-        lineHeight = size.sp*1.2,
+        lineHeight = size.sp * 1.2,
         color = color,
         textAlign = TextAlign.Center,
     )
