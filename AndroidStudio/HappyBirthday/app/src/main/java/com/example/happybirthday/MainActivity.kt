@@ -38,29 +38,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Image(
-                                painter = painterResource(id = R.drawable.ic_task_completed),
-                                contentDescription = null
-                            )
-                            Text(
-                                text = "All tasks completed",
-                                textAlign = TextAlign.Center,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
-
-                            )
-                            Text(
-                                text = "Nice Work!",
-                                textAlign = TextAlign.Center,
-                                fontSize = 16.sp
-                            )
-                        }
-                    }
+                    ComposeQuadrant()
                 }
             }
         }
@@ -155,17 +133,174 @@ fun Welcome(
     )
 }
 
+
+@Composable
+fun TaskManager() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_task_completed),
+                contentDescription = null
+            )
+            Text(
+                text = "All tasks completed",
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
+
+            )
+            Text(
+                text = "Nice Work!",
+                textAlign = TextAlign.Center,
+                fontSize = 16.sp
+            )
+        }
+    }
+}
+
+@Composable
+fun ComposeQuadrant() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Row(
+            modifier = Modifier
+                .weight(0.5f)
+                .fillMaxSize(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Surface(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(0.5f),
+                color = Color(0xFFEADDFF)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Text Composable",
+                        modifier = Modifier.padding(bottom =  16.dp),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "Displays text and follows the recommended " +
+                                "Material Design guidelines.",
+                        modifier = Modifier,
+                        textAlign = TextAlign.Justify,
+                    )
+                }
+            }
+            Surface(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(0.5f),
+                color = Color(0xFFD0BCFF)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Image Composable",
+                        modifier = Modifier.padding(bottom =  16.dp),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "Creates a composable that lays out and draws" +
+                                " a given Painter class object.",
+                        modifier = Modifier,
+                        textAlign = TextAlign.Justify,
+                    )
+                }
+            }
+        }
+        Row(
+            modifier = Modifier
+                .weight(0.5f)
+                .fillMaxSize(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Surface(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(0.5f),
+                color = Color(0xFFB69DF8)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Row Composable",
+                        modifier = Modifier.padding(bottom =  16.dp),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "A layout composable that places its children " +
+                                "in a horizontal sequence.",
+                        modifier = Modifier,
+                        textAlign = TextAlign.Justify,
+                    )
+                }
+            }
+            Surface(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(0.5f),
+                color = Color(0xFFF6EDFF)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Column Composable",
+                        modifier = Modifier.padding(bottom =  16.dp),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "A layout composable that places its children " +
+                                "in a vertical sequence.",
+                        modifier = Modifier,
+                        textAlign = TextAlign.Justify,
+                    )
+                }
+            }
+        }
+    }
+}
+
+
 @Preview(
     name = "Preview",
     showBackground = false,
     showSystemUi = true,
-    wallpaper = Wallpapers.BLUE_DOMINATED_EXAMPLE
+    wallpaper = Wallpapers.BLUE_DOMINATED_EXAMPLE,
 )
 @Composable
 fun GreetingPreview() {
     HappyBirthdayTheme {
 //        GreetingText(message = "Happy Birthday, Sam!")
 //        GreetingImage(message = "Alex", from = "Sid")
+//        TaskManager()
+        ComposeQuadrant()
     }
 }
 
