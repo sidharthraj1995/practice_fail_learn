@@ -1,19 +1,25 @@
 package com.example.businesscard
 
 import android.os.Bundle
+import android.text.Layout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +29,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.businesscard.ui.theme.BusinessCardTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,7 +55,7 @@ fun BusinessCard() {
     val myAppIcon = Icons.Rounded
 
     Surface(
-        modifier = Modifier,
+        modifier = Modifier.fillMaxSize(),
         color = Color.Black
     ) {
         Column(
@@ -56,15 +64,19 @@ fun BusinessCard() {
             verticalArrangement = Arrangement.Center
         ) {
             Surface(         // Center Surface
-                modifier = Modifier
+                modifier = Modifier.padding(24.dp)
             ) {
                 Column(
-                    modifier = Modifier
+                    modifier = Modifier,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    Surface {
+                    Surface(
+                        modifier = Modifier.height(96.dp).width(96.dp).fillMaxSize(),
+                    ) {
                         Image(
                             painter = painterResource(id = R.drawable.android_logo),
-                            contentDescription = "Company Logo"
+                            contentDescription = "Business Logo"
                         )
                     }
                     Surface(
@@ -74,6 +86,7 @@ fun BusinessCard() {
                         Text(
                             text = "Full Name",
                             fontWeight = FontWeight.Bold,
+                            fontSize = 48.sp
                         )
                     }
                     Surface(
@@ -84,66 +97,76 @@ fun BusinessCard() {
                     }
                 }
             }
-        }
-        Surface {           // Bottom surface
-            Column(
-                modifier = Modifier,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Bottom
-            ) {
-                Surface(
+            Surface(
+                modifier = Modifier.padding(top = 48.dp).align(alignment = Alignment.CenterHorizontally)
+            ) {           // Bottom surface
+                Column(
                     modifier = Modifier,
-                    color = Color.White
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom
                 ) {
-                    Row(
+                    Surface(
                         modifier = Modifier,
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                        color = Color.White
                     ) {
-                        Icon(
-                            imageVector = myAppIcon.Phone,
-                            contentDescription = "Phone Number",
-                            modifier = Modifier.align(alignment = Alignment.Top)
-                        )
-                        Text(
-                            text = "+1 234 345 9876",
-                            modifier = Modifier.align(alignment = Alignment.Bottom)
-                        )
+                        Row(
+                            modifier = Modifier,
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Icon(
+                                imageVector = myAppIcon.Phone,
+                                contentDescription = "Phone Number",
+                                modifier = Modifier.align(alignment = Alignment.Top)
+                            )
+                            Text(
+                                text = "+1-234-345-9876",
+                                modifier = Modifier
+                                    .align(alignment = Alignment.Bottom)
+                                    .clickable { },
+
+                                )
+                        }
                     }
-                }
-                Surface(
-                    modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-                    color = Color.White
-                ) {
-                    Row(
-                        modifier = Modifier,
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceAround
+                    Surface(
+                        modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+                        color = Color.White
                     ) {
-                        Icon(
-                            imageVector = myAppIcon.Share,
-                            contentDescription = "Social Media",
-                        )
-                        Text(text = "@ButtSniffer")
+                        Row(
+                            modifier = Modifier,
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceAround
+                        ) {
+                            Icon(
+                                imageVector = myAppIcon.Share,
+                                contentDescription = "Social Media",
+                            )
+                            Text(text = "@ButtSniffer")
+                        }
                     }
-                }
-                Surface(
-                    modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-                    color = Color.White
-                ) {
-                    Row(
-                        modifier = Modifier,
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceAround
+                    Surface(
+                        modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+                        color = Color.White
                     ) {
-                        Icon(
-                            imageVector = myAppIcon.Email,
-                            contentDescription = "Email address"
-                        )
-                        Text(text = "admin@snifButt.edu")
+                        Row(
+                            modifier = Modifier,
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceAround
+                        ) {
+                            Surface(
+                                modifier = Modifier,
+
+                            ) {
+                                Icon(
+                                    imageVector = myAppIcon.Email,
+                                    contentDescription = "Email address",
+                                    )
+                            }
+                            Text(text = "admin@snifButt.edu")
+                        }
                     }
+
                 }
-                
             }
         }
     }
@@ -157,9 +180,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true
+)
 @Composable
-fun GreetingPreview() {
+fun BusinessPreview() {
     BusinessCardTheme {
         BusinessCard()
     }
