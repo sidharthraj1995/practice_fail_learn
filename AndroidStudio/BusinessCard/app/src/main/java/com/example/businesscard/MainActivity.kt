@@ -1,11 +1,9 @@
 package com.example.businesscard
 
 import android.os.Bundle
-import android.text.Layout
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,7 +17,6 @@ import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,18 +50,21 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BusinessCard() {
     val myAppIcon = Icons.Rounded
+    val bgColor = 0xFF92d3b2
+    val textColor = 0xFF08703c
 
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.Black
+        color = Color(bgColor)
     ) {
-        Column(
+        Column(                             // Center Surface
             modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Surface(         // Center Surface
-                modifier = Modifier.padding(24.dp)
+            Surface(
+                modifier = Modifier.padding(24.dp),
+                color = Color.Transparent
             ) {
                 Column(
                     modifier = Modifier,
@@ -72,113 +72,115 @@ fun BusinessCard() {
                     verticalArrangement = Arrangement.Center
                 ) {
                     Surface(
-                        modifier = Modifier.height(96.dp).width(96.dp).fillMaxSize(),
+                        modifier = Modifier
+                            .height(96.dp)
+                            .width(96.dp)
+                            .fillMaxSize(),
+                        color = Color.DarkGray
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.android_logo),
-                            contentDescription = "Business Logo"
+                            contentDescription = "Business Logo",
+                            modifier = Modifier,
+//                            colorFilter = ColorFilter.tint()
                         )
                     }
                     Surface(
                         modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-                        color = Color.White
+                        color = Color.Transparent
                     ) {
                         Text(
-                            text = "Full Name",
-                            fontWeight = FontWeight.Bold,
+                            text = "Sidharth Raj",
+//                            fontWeight = FontWeight.Bold,
                             fontSize = 48.sp
                         )
                     }
                     Surface(
                         modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-                        color = Color.White
+                        color = Color.Transparent
                     ) {
-                        Text(text = "Title")
+                        Text(
+                            text = "Jack of All Trades",
+                            color = Color(textColor),
+                            fontWeight = FontWeight.Bold,
+                        )
                     }
                 }
             }
+        }
+        Column(                                             // Bottom surface
+            modifier = Modifier.padding(all = 24.dp),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Surface(
-                modifier = Modifier.padding(top = 48.dp).align(alignment = Alignment.CenterHorizontally)
-            ) {           // Bottom surface
-                Column(
+                modifier = Modifier
+                    .padding(top = 48.dp),
+                color = Color.Transparent
+            ) {
+                Row(
                     modifier = Modifier,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Bottom
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    Surface(
-                        modifier = Modifier,
-                        color = Color.White
+                    Surface(                        // Icons
+                        modifier = Modifier.padding(),
+                        color = Color.Transparent
                     ) {
-                        Row(
-                            modifier = Modifier,
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceEvenly
+                        Column(
+                            modifier = Modifier.padding(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
                         ) {
                             Icon(
                                 imageVector = myAppIcon.Phone,
                                 contentDescription = "Phone Number",
-                                modifier = Modifier.align(alignment = Alignment.Top)
+                                modifier = Modifier.padding(12.dp),
+                                tint = Color(textColor)
                             )
-                            Text(
-                                text = "+1-234-345-9876",
-                                modifier = Modifier
-                                    .align(alignment = Alignment.Bottom)
-                                    .clickable { },
-
-                                )
-                        }
-                    }
-                    Surface(
-                        modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-                        color = Color.White
-                    ) {
-                        Row(
-                            modifier = Modifier,
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceAround
-                        ) {
                             Icon(
                                 imageVector = myAppIcon.Share,
                                 contentDescription = "Social Media",
+                                modifier = Modifier.padding(12.dp),
+                                tint = Color(textColor)
                             )
-                            Text(text = "@ButtSniffer")
+                            Icon(
+                                imageVector = myAppIcon.Email,
+                                contentDescription = "Email address",
+                                modifier = Modifier.padding(12.dp),
+                                tint = Color(textColor)
+                            )
                         }
                     }
-                    Surface(
-                        modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-                        color = Color.White
+                    Surface(                        // Text
+                        modifier = Modifier,
+                        color = Color.Transparent
                     ) {
-                        Row(
+                        Column(
                             modifier = Modifier,
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceAround
+                            horizontalAlignment = Alignment.Start,
+                            verticalArrangement = Arrangement.Center
                         ) {
-                            Surface(
-                                modifier = Modifier,
-
-                            ) {
-                                Icon(
-                                    imageVector = myAppIcon.Email,
-                                    contentDescription = "Email address",
-                                    )
-                            }
-                            Text(text = "admin@snifButt.edu")
+                            Text(
+                                text = "+1-234-345-9876",
+                                modifier = Modifier.padding(12.dp)
+                            )
+                            Text(
+                                text = "@ButtSniffer",
+                                modifier = Modifier.padding(12.dp)
+                            )
+                            Text(
+                                text = "admin@snifButt.edu",
+                                modifier = Modifier.padding(12.dp)
+                            )
                         }
                     }
-
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
 @Preview(
     showBackground = true
