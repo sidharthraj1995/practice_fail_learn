@@ -1,9 +1,12 @@
+import java.lang.foreign.SymbolLookup
+import kotlin.math.min
+
 fun main() {
 
     /*
     Android Developer Course - Unit 2 - Kotlin Practice
     https://developer.android.com/codelabs/basic-android-kotlin-compose-kotlin-fundamentals-practice-problems?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-1%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-kotlin-fundamentals-practice-problems#1
-
+    */
     // Problem 1
     val morningNotification = 51
     val eveningNotification = 135
@@ -29,15 +32,14 @@ fun main() {
 
 
     // Problem 3
-    printFinalTemperature(28.0, "Celcius", "Fahrenheit") { 9 / 5 * it + 32 }
-    printFinalTemperature(60.0, "Celcius", "Kelvin") { it - 273.15 }
+    printFinalTemperature(28.0, "Celsius", "Fahrenheit") { 9 / 5 * it + 32 }
+    printFinalTemperature(60.0, "Celsius", "Kelvin") { it - 273.15 }
     printFinalTemperature(10.0, "Fahrenheit", "Kelvin") { 5.0 / 9.0 * (it - 32) + 273.15 }
 
     // Problem 4
     val song1 = Song("Deli", "Ice Spice", 2023)
     song1.printInfo()
     println(song1.isPopular)
-     */
 
     // Problem 5
     val amanda = Person("Amanda", 33, "play tennis", null)
@@ -45,6 +47,22 @@ fun main() {
 
     amanda.showProfile()
     atiqah.showProfile()
+
+    // Problem 6
+    val newFoldablePhone = FoldablePhone()
+
+    newFoldablePhone.switchOn()
+    newFoldablePhone.checkPhoneScreenLight()
+    newFoldablePhone.unfold()
+    newFoldablePhone.switchOn()
+    newFoldablePhone.checkPhoneScreenLight()
+
+
+    // Problem 7
+    val winningBid = Bid(5000, "Private Collector")
+
+    println("Item A is sold at ${auctionPrice(winningBid, 2000)}.")
+    println("Item B is sold at ${auctionPrice(null, 3000)}.")
 }
 
 
@@ -60,19 +78,6 @@ fun ticketPrice(age: Int, isMonday: Boolean): Int {
     val price3 = 20
 
     val discount1 = 5
-
-//    if (age > 0 && age <= 12) {
-//        return price1
-//    } else if (age >= 13 && age <= 60) {
-//        if (isMonday) {
-//            return price2 - discount1
-//        }
-//        return price2
-//    } else if (age >= 61 && age <= 100) {
-//        return price3
-//    }
-//
-//    return -1
 
     return when (age) {
         in 0..12 -> price1
@@ -92,10 +97,10 @@ fun printFinalTemperature(
     println("$initialMeasurement degrees $initialUnit is $finalMeasurement degrees $finalUnit.")
 }
 
-class Song( _tite : String, _artist : String, _year : Int ) {
-    val title = _tite
-    val artist = _artist
-    val year = _year
+class Song( val title : String, val artist : String, val year : Int ) {
+//    val title = _title
+//    val artist = _artist
+//    val year = _year
     var playCount : Int = 0
     var isPopular : Boolean = playCount > 1000
 
@@ -119,13 +124,47 @@ class Person(val name: String, val age: Int, val hobby: String?, val referrer: P
         }
         else println("Doesn't have a referrer.")
     }
-    /*
-    Name: Amanda
-    Age: 33
-    Likes to play tennis. Doesn't have a referrer.
+}
 
-    Name: Atiqah
-    Age: 28
-    Likes to climb. Has a referrer named Amanda, who likes to play tennis.
-    */
+open class Phone(var isScreenLightOn: Boolean = false){
+    open fun switchOn() {
+        isScreenLightOn = true
+    }
+
+    fun switchOff() {
+        isScreenLightOn = false
+    }
+
+    fun checkPhoneScreenLight() {
+        val phoneScreenLight = if (isScreenLightOn) "on" else "off"
+        println("The phone screen's light is $phoneScreenLight.")
+    }
+}
+
+class FoldablePhone(var isFolded : Boolean = true) : Phone() {
+
+    override fun switchOn() {
+        if(!isFolded) {
+            isScreenLightOn = true
+        }
+        else println("Phone is currently folded, cannot turn the screen ON")
+    }
+
+    fun fold() {
+        isFolded = true
+    }
+
+    fun unfold() {
+        isFolded = false
+    }
+}
+
+
+class Bid(val amount: Int, val bidder: String)
+
+fun auctionPrice(bid: Bid?, minimumPrice: Int): Int {
+    return if (bid != null && bid.amount > minimumPrice) {
+        bid.amount
+    }
+    else minimumPrice
 }
